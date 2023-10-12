@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { flushSync } from "react-dom";
 import { DemoUseEffect } from "./use-effect";
+import { TodoList } from "./use-effect/todo-list";
 // rfce | rfc: tạo nhanh 1 function component
 
 // const _useState = (initValue) => {
@@ -51,6 +52,7 @@ export function App() {
       console.log(i);
     }
   };
+
   const handleChangeCount = () => {
     // setState: thì component sẽ chạy lại toàn bộ nội dung bên trong component, state sẽ không tạo lại
     // biến, function,... mới tạo lại
@@ -60,10 +62,21 @@ export function App() {
   };
 
   // console.log("[[3]]");
+  const [show, setShow] = useState(true);
+
+  return <TodoList />;
 
   return (
     <>
-      <DemoUseEffect />
+      {show && <DemoUseEffect />}
+
+      <button
+        onClick={() => {
+          setShow((s) => !s);
+        }}
+      >
+        Toggle
+      </button>
 
       <button onClick={handleChangeCount}>Count: {count}</button>
       <button
